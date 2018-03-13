@@ -525,10 +525,11 @@
           $tooltip.$viewport = options.viewport && findElement(options.viewport.selector || options.viewport);
           if (autoPlace) {
             var originalPlacement = placement;
+            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop || 0;
             var viewportPosition = getPosition($tooltip.$viewport);
-            if (/bottom/.test(originalPlacement) && elementPosition.bottom + tipHeight > viewportPosition.bottom) {
+            if (/bottom/.test(originalPlacement) && elementPosition.bottom + tipHeight - scrollTop > viewportPosition.bottom) {
               placement = originalPlacement.replace('bottom', 'top');
-            } else if (/top/.test(originalPlacement) && elementPosition.top - tipHeight < viewportPosition.top) {
+            } else if (/top/.test(originalPlacement) && elementPosition.top - tipHeight - scrollTop  < viewportPosition.top) {
               placement = originalPlacement.replace('top', 'bottom');
             }
             if (/left/.test(originalPlacement) && elementPosition.left - tipWidth < viewportPosition.left) {
